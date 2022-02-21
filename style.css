@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+*{
+	box-sizing: border-box;
+	position: relative;
+	cursor: default;
+	margin: 0;
+	font-family: 'Lato';
+}
+html{
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	font-size: 62.5%;
+}
+body{
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	font-family: 'Encode Sans Expanded';
+	scroll-behavior: smooth;
+	overflow-x: hidden;
+}
+#canvas{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	/*background: lightpink;*/
+
+}
+.main-container{
+	display: flex;
+}
+.player{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0, 0, 0,0.05);
+}
+#player1{
+	width: 50vw;
+	height: 100vh;
+}
+
+#player2{
+	width: 50vw;
+	height: 100vh;
+}
+
+.player-label{
+	margin-left: 7rem;
+	font-weight: 200;
+	text-transform: uppercase;
+	font-size: 7rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.dot{
+	display: inline-block;
+	height: 2.5rem;
+	width: 2.5rem;
+	border-radius: 50%;
+	margin-left: 3rem;
+	opacity: 0;
+	background: rgb(214, 69, 65);
+}
+.dot-active{
+	opacity: 1;
+}
+.active-player{
+	background: rgba(220,220,220,1);
+}
+.globalScore{
+	font-size: 11rem;
+	font-weight: 200;
+	color: rgb(214, 69, 65);
+}
+.currentScore-container{
+	margin: 25rem 0 0 0;
+	text-align: center;
+	width: 20rem;
+	height: 13rem;
+	background: rgba(136, 136, 136, 1.0);
+	border-radius: 0.3rem;
+	background: rgb(214, 69, 65);
+
+}
+.currentScore-container .label{
+	margin: 1.2rem 2rem 1.2rem 2rem;
+	font-family: Lato:wght@300;
+	font-size: 2.2rem;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+.currentScore-container .score{
+	font-weight: 200;
+	color: white;
+	font-size: 5.2rem;
+}
+.pannel-container{
+	z-index: 2;
+	text-align: center;
+	font-size: 2.8rem;
+	text-transform: uppercase;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%,-50%);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+#playerPannel{
+	bottom: 11%;
+	height: 13rem;
+}
+#gamePannel{
+	top: 8%;
+	flex-direction: row;
+	align-items: center;
+}
+.roll-btn, .hold-btn{
+	display: flex;
+	align-items: center;
+}
+.pannel-container img{
+	margin-right: 2rem;
+	width: 4rem;
+}
+.dice-container{
+	z-index: 2;
+	position: absolute;
+	top: 36%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 17rem;
+	height: 17rem;
+	background: rgba(250,250,250,1);
+	opacity: 0.95;
+	box-shadow: 3px 4px 45px -2px rgba(191,191,191,0.62);
+	border-radius: 0.3rem;
+}
+.dice-dot{
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	background: rgb(214, 69, 65);
+}
+.face{
+	width: 17rem;
+	height: 17rem;
+	padding: 2.5rem;
+}
+/*----------------------------------------- FACE 1 */
+
+#face1{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: none;
+}
+/*----------------------------------------- FACE 2 */
+
+#face2{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	display: none;
+}
+#face2 .dice-dot:nth-of-type(2){
+	align-self: flex-end;
+}
+/*----------------------------------------- FACE 3 */
+#face3{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	display: none;
+}
+#face3 .dice-dot:nth-of-type(1){
+	align-self: flex-start;
+}
+#face3 .dice-dot:nth-of-type(3){
+	align-self: flex-end;
+}
+/*----------------------------------------- FACE 4 */
+
+#face4{
+	display: flex;
+	justify-content: space-between;
+	display: none;
+}
+#face4 .col{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+/*----------------------------------------- FACE 5 */
+#face5{
+	display: flex;
+	justify-content: space-between;
+	display: none;
+
+}
+#face5 .col{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+#face5 .col:nth-of-type(2){
+	justify-content: center;
+}
+/*----------------------------------------- FACE 6 */
+#face6{
+	display: flex;
+	justify-content: space-between;
+}
+#face6 .col{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+
+@media screen and (max-width: 900px){
+
+	.main-container{
+		flex-direction: column;
+	}
+	.player{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+	}
+	#player1, #player2{
+		width: 100vw;
+		height: 50vh;
+	}
+	.player-label{
+		font-size: 5.5rem;
+	}
+	.globalScore{
+		font-size: 9.5rem;
+	}
+	.currentScore-container{
+		margin: 0;
+		width: 14rem;
+		height: 10rem;
+	}
+	.currentScore-container .label{
+		margin: 1.2rem 2rem 1.2rem 2rem;
+		font-family: Lato:wght@300;
+		font-size: 2rem;
+
+	}
+	.currentScore-container .score{
+		font-size: 3.5rem;
+	}
+	#playerPannel{
+		position: absolute;
+		top: 50%;
+		left: 22%;
+		transform: translate(-50%,-50%);
+		font-size: 2.4rem;
+	}
+	.pannel-container img{
+		margin-right: 1.5rem;
+		width: 3.5rem;
+	}
+	#gamePannel{
+		top: 4%;
+		left: 50%;
+	}
+	.dice-container{
+		top: 50%;
+		left: 80%;
+		transform: translate(-50%,-50%);
+		width: 15rem;
+		height: 15rem;
+	}
+	.dice-dot{
+		width: 2rem;
+		height: 2rem;
+	}
+	.face{
+		width: 15rem;
+		height: 15rem;
+	}
+}
+@media screen and (max-width: 700px){
+	.player{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.player-label{
+		margin-top: 40rem;
+		font-size: 5rem;
+	}
+	#player1, #player2{
+		width: 100vw;
+		height: 100vh;
+	}
+	#gamePannel{
+		top:  5%;
+		left: 50%;
+	}
+	#playerPannel{
+		top: 45%;
+		left: 25%;
+		height: 11rem;
+	}
+	.currentScore-container{
+		position: absolute;
+		top: 45%;
+		left: 75%;
+		transform: translate(-50%,-50%);
+		margin: 0;
+		width: 18rem;
+		height: 11rem;
+	}
+	#player2{
+		display: none;
+	}
+	.dice-container{
+		top: 20%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		width: 15rem;
+		height: 15rem;
+	}
+	.dice-dot{
+		width: 2rem;
+		height: 2rem;
+	}
+	.face{
+		width: 15rem;
+		height: 15rem;
+	}
+}
+}
