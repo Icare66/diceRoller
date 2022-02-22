@@ -13,11 +13,6 @@
 </head>
 <body>
 	<div class="main-container">
-		<!-- Game pannel -->
-		<div class="pannel-container" id="gamePannel">
-			<img id="start-btn" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/fa314a/external-add-instagram-flatart-icons-outline-flatarticons.png"/>
-			<span>new game</span>
-		</div>
 		<!-- Player 1 -->
 		<div class="player active-player" id="player1">
 			<h1 class="player-label">Player 1<span id="dot_player1" class="dot dot-active"></span></h1>
@@ -28,80 +23,40 @@
 			</div>
 		</div>
 		<!-- Player 2 -->
-		<div class="player" id="player2">
+		<div class="player hide" id="player2">
 			<h1 class="player-label">Player 2<span id="dot_player2" class="dot"></span></h1>
 			<div class="globalScore" id="global_score_player_2" >0</div>
 			<div class="currentScore-container">
 				<div class="label">Current</div>
-				<div class="score" id="current_score_player_2">0</div>
+				<div class="score" id="current_score_player_2" style="background: blue;">0</div>
 			</div>
 		</div>
 		<!-- Player pannel -->
-		<div class="pannel-container" id="playerPannel">
-			<div class="roll-btn">
-				<img id="roll-btn" src="https://img.icons8.com/ios/50/fa314a/update-left-rotation.png"/>
-				<span>roll dice</span>
-			</div>
-			<div class="hold-btn">
-				<img id="hold-btn"src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/fa314a/external-download-interface-kiranshastry-solid-kiranshastry.png"/>
-				<span>hold</span>
-			</div>
-		</div>
-		<!-- Dice -->
-		<div class="dice-container">
-			<div id="start-face">?</div>
-			<div class="face" id="face1">
-				<span class="dice-dot"></span>
-			</div>
-			<div class="face" id="face2">
-				<span class="dice-dot"></span>
-				<span class="dice-dot"></span>
-			</div>
-			<div class="face" id="face3">
-				<span class="dice-dot"></span>
-				<span class="dice-dot"></span>
-				<span class="dice-dot"></span>
-			</div>
-			<div class="face" id="face4">
-				<div class="col">
-					<span class="dice-dot"></span>
-					<span class="dice-dot"></span>
-				</div>
-				<div class="col">
-					<span class="dice-dot"></span>
-					<span class="dice-dot"></span>
+		<div class="pannel-container">
+			<!-- Game pannel -->
+			<div id="gamePannel">
+				<div class="start-btn">
+					<img id="start-btn" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/fa314a/external-add-instagram-flatart-icons-outline-flatarticons.png"/>
+					<span>new game</span>
 				</div>
 			</div>
-			<div class="face" id="face5">
-				<div class="col">
-					<span class="dice-dot"></span>
-					<span class="dice-dot"></span>
+			<!-- player pannel -->
+			<div id="playerPannel">
+				<div class="roll-btn">
+					<img id="roll-btn" src="https://img.icons8.com/ios/50/fa314a/update-left-rotation.png"/>
+					<span>roll dice</span>
 				</div>
-				<div class="col">
-					<span class="dice-dot"></span>
+				<div class="hold-btn">
+					<img id="hold-btn"src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/fa314a/external-download-interface-kiranshastry-solid-kiranshastry.png"/>
+					<span>hold</span>
 				</div>
-				<div class="col">
-					<span class="dice-dot"></span>
-					<span class="dice-dot"></span>
-				</div>
-			</div>
-
-			<div class="face" id="face6">
-				<div class="col">
-					<span class="dice-dot"></span>
-					<span class="dice-dot"></span>
-					<span class="dice-dot"></span>
-
-				</div>
-				<div class="col">
-					<span class="dice-dot"></span>
-					<span class="dice-dot"></span>
-					<span class="dice-dot"></span>
-				</div>
-
 			</div>
 		</div>
 	</div>
+			<!-- Dice -->
+		<div class="canvas-container">
+		<canvas class="" id="canvas"></canvas>
+		</div>
 	<script type="text/javascript" src="script.js"></script>
 
 </body>

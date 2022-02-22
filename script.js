@@ -1,15 +1,8 @@
-//Players
+(function() {
 var background_p1 = document.getElementById("player1");
 var background_p2 = document.getElementById("player2");
 var dot_p1 = document.getElementById("dot_player1");
 var dot_p2 = document.getElementById("dot_player2");
-
-for(var i=0;i<100;i++){
-	var rand = Math.floor(Math.random() * 6) +1;
-
-}
-
-
 var rollButton = document.getElementById("roll-btn");
 var holdButton = document.getElementById("hold-btn");
 var startButton = document.getElementById("start-btn");
@@ -17,83 +10,33 @@ var ROUND_DIV_P1 = document.getElementById('current_score_player_1');
 var ROUND_DIV_P2 = document.getElementById('current_score_player_2');
 var SCORE_DIV_P1 = document.getElementById('global_score_player_1');
 var SCORE_DIV_P2 = document.getElementById('global_score_player_2');
-var diceContainer = document.getElementById('dice-container');
-var faces = new Array();
-//Dice
-var face1 = document.getElementById('face1');
-var face2 = document.getElementById('face2');
-var face3 = document.getElementById('face3');
-var face4 = document.getElementById('face4');
-var face5 = document.getElementById('face5');
-var face6 = document.getElementById('face6');
 
-/*faces.push(document.getElementById('face1'),document.getElementById('face2'),document.getElementById('face3'),
-	document.getElementById('face4'),document.getElementById('face5'),document.getElementById('face6'));*/
+var canvas = document.getElementById('canvas');
+var drawingSurface = canvas.getContext('2d');
 
+var dice ={
+	SIZE: 200,
+	COLUMNS: 6,
+	sourceWidth: 200,
+	sourceHeight: 200,
+	x:0,
+	y:0,
+	width: canvas.width,
+	height: canvas.height,
+	sourceX: 0,
+	sourceY:0,
+	updateFace(face){
+		this.sourceX = ((face-1) % this.COLUMNS) * this.SIZE;
+	}
+}
 class Player{
 	ROUND =0;
 	score =0;
 	win=false;
-
-	resetDice(){
-		face1.className="face";
-		face2.className="face";
-		face3.className="face";
-		face4.className="face";
-		face5.className="face";
-		face6.className="face";
-	}
 	roll(){
-
-/*		face1.classList.remove('visible');
-		face2.classList.remove('visible');
-		face3.classList.remove('visible');
-		face4.classList.remove('visible');
-		face5.classList.remove('visible');
-		face6.classList.remove('visible');
-
-		face1.className="face";
-		face2.className="face";
-		face3.className="face";
-		face4.className="face";
-		face5.className="face";
-		face6.className="face";*/
-
-		this.resetDice();
-
+		canvas.classList.remove('rotate'); // unset the rotate class
 		let RAND = Math.floor(Math.random() * 5) +1;
-
-		switch(RAND){
-			case 1:
-				face1.className = "face visible";
-				break;
-			case 2:
-				face2.className = "face visible";
-				break;
-			case 3:
-				face3.className = "face visible";
-				break;
-			case 4:
-				face4.className = "face visible";
-				break;
-			case 5:
-				face5.className = "face visible";
-				break;
-			case 6:
-				face6.className = "face visible";
-				break;
-		}
-
-
-
-
-/*		let RAND = Math.floor(Math.random() * 5) +1;
-
-		faces.forEach(function(face){
-			face.classList.remove('visible');
-		});
-		faces[RAND].classList.add('visible');*/
-
+		dice.updateFace(RAND);
 		if(RAND === 1){
 			this.ROUND=0;
 			this.active=false;
@@ -112,40 +55,24 @@ class Player{
 		}
 	}
 }
-
-var player1 = new Player();
-var player2 = new Player();
-activePlayer = player1;
-
-rollButton.addEventListener('click', function(){
-	activePlayer.roll();
-	if(activePlayer.ROUND ===0){
-		displayRound();
-		nextPlayer();
-		displayBg();
-	}else{
-		activePlayer.testWin();
-		if(activePlayer.win === true){
-			gamestate=OVER;
-		}
-		displayRound();
-	}
-});
-
-holdButton.addEventListener('click', function(){
-	activePlayer.hold();
-	displayRound();
-	displayScore();
-	nextPlayer();
-	displayBg();
-});
-
-
 function nextPlayer(){
 	if(Object.is(activePlayer, player1)){
 		activePlayer = player2;
+		setClassHide();
 	}else{
 		activePlayer = player1;
+		setClassHide();
+	}
+}
+function setClassHide(){
+	if(window.screen.width <=700){
+		if(Object.is(activePlayer, player1)){
+			background_p1.classList.remove('hide');
+			background_p2.classList.add('hide');
+		}else{
+			background_p1.classList.add('hide');
+			background_p2.classList.remove('hide');
+		}
 	}
 }
 function displayRound(){
@@ -175,4 +102,54 @@ function displayScore(){
 		SCORE_DIV_P2.innerHTML = activePlayer.score;
 	}
 }
+function loadHandler(){update();}
+function update(){
+	window.requestAnimationFrame(update, canvas);
+	render();
+}
+function render(){
+	drawingSurface.clearRect(0,0,canvas.width,canvas.height);
+	drawingSurface.drawImage(image, dice.sourceX, dice.sourceY,dice.sourceWidth, dice.sourceHeight, Math.floor(dice.x),Math.floor(dice.y),dice.width, dice.height);
+	canvas.classList.add('rotate'); //Set the rotate class
+}
+
+// Main program
+var player1 = new Player();
+var player2 = new Player();
+var activePlayer = player1; // Le joueur 1 commence
+var image= new Image();
+
+image.addEventListener('load', loadHandler,false); // Chargement de l'image
+image.src = "images/diceImage.png";
+
+//Event listeners
+rollButton.addEventListener('click', function(){
+	activePlayer.roll();
+	if(activePlayer.ROUND ===0){
+		displayRound();
+		nextPlayer();
+		displayBg();
+	}else{
+		activePlayer.testWin();
+		if(activePlayer.win === true){
+			gamestate=OVER;
+		}
+		displayRound();
+	}
+});
+holdButton.addEventListener('click', function(){
+	activePlayer.hold();
+	displayRound();
+	displayScore();
+	nextPlayer();
+	displayBg();
+});
+
+})();
+
+
+
+
+
+
 

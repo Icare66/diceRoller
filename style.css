@@ -19,18 +19,8 @@ body{
 	padding: 0;
 	width: 100vw;
 	height: 100vh;
-	font-family: 'Encode Sans Expanded';
 	scroll-behavior: smooth;
 	overflow-x: hidden;
-}
-#canvas{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	/*background: lightpink;*/
-
 }
 .main-container{
 	display: flex;
@@ -104,149 +94,59 @@ body{
 	font-size: 5.2rem;
 }
 .pannel-container{
-	z-index: 2;
 	text-align: center;
 	font-size: 2.8rem;
 	text-transform: uppercase;
 	position: absolute;
-	left: 50%;
-	transform: translate(-50%,-50%);
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	align-items: center;
 }
 #playerPannel{
-	bottom: 11%;
-	height: 13rem;
+	z-index: 1;
+	position: relative;
+	bottom: 13%;
 }
-#gamePannel{
-	top: 8%;
-	flex-direction: row;
-	align-items: center;
-}
-.roll-btn, .hold-btn{
+.roll-btn, .hold-btn, .start-btn{
 	display: flex;
 	align-items: center;
+	margin: 4.5rem;
 }
 .pannel-container img{
 	margin-right: 2rem;
 	width: 4rem;
 }
-.dice-container{
+.canvas-container{
 	position: absolute;
-	top: 36%;
-	left: 50%;
-	transform: translate(-50%,-50%);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#canvas{
+	margin-bottom: 13rem;
 	width: 17rem;
 	height: 17rem;
 	opacity: 0.95;
-	border-radius: 0.3rem;
+	border-radius: 2rem;
 	background: rgba(250,250,250,1);
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
-#start-face{
-	font-size: 15rem;
-	color :rgb(214, 69, 65);
+.rotate{
+	animation: rotateDice 1s ease;
+
 }
-.dice-dot{
-	width: 2.5rem;
-	height: 2.5rem;
-	border-radius: 50%;
-	background: rgb(214, 69, 65);
-}
-.face{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 17rem;
-	height: 17rem;
-	padding: 2.5rem;
-	background: rgba(250,250,250,1);
-	box-shadow: 3px 4px 45px -2px rgba(191,191,191,0.62);
-	opacity: 0;
-}
-.visible{
-	opacity: 0.9;
-	transform: rotate(360deg);
-	transition: transform 1s ease;
-	animation: rotateDice 1s cubic-bezier(0.85, 0, 0.15, 1); 1s 2 alternate forwards;
-}
+
 /*----------------------------------------- FACE 1 */
 
-#face1{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-/*----------------------------------------- FACE 2 */
-
-#face2{
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-
-}
-#face2 .dice-dot:nth-of-type(2){
-	align-self: flex-end;
-}
-/*----------------------------------------- FACE 3 */
-#face3{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
-}
-#face3 .dice-dot:nth-of-type(1){
-	align-self: flex-start;
-}
-#face3 .dice-dot:nth-of-type(3){
-	align-self: flex-end;
-}
-/*----------------------------------------- FACE 4 */
-
-#face4{
-	display: flex;
-	justify-content: space-between;
-
-}
-#face4 .col{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-/*----------------------------------------- FACE 5 */
-#face5{
-	display: flex;
-	justify-content: space-between;
-}
-#face5 .col{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-#face5 .col:nth-of-type(2){
-	justify-content: center;
-}
-/*----------------------------------------- FACE 6 */
-#face6{
-	display: flex;
-	justify-content: space-between;
-
-}
-#face6 .col{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-.visible2{
-	opacity: 1;
-	transform: rotate(720deg);
-	transition: transform 1s ease;
-	animation: rotateDice 1s cubic-bezier(0.85, 0, 0.15, 1); 1s 2 alternate forwards;
-}
 @keyframes rotateDice {
   0% {
     transform: rotate(0);
@@ -293,86 +193,92 @@ body{
 	.currentScore-container .score{
 		font-size: 3.5rem;
 	}
+
+	.pannel-container{
+		display: block;
+
+	}
 	#playerPannel{
+		font-size: 2.5rem;
+		height: 12rem;
 		position: absolute;
 		top: 50%;
-		left: 22%;
+		left: 20%;
 		transform: translate(-50%,-50%);
-		font-size: 2.4rem;
+	}
+	.roll-btn, .hold-btn, .start-btn{
+		display: flex;
+		align-items: center;
+		margin: 0;
+	}
+	.roll-btn{
+		margin-bottom: 5rem;
 	}
 	.pannel-container img{
 		margin-right: 1.5rem;
 		width: 3.5rem;
 	}
 	#gamePannel{
-		top: 4%;
+		position: absolute;
+		top: 0;
 		left: 50%;
+		transform: translateX(-50%);
+		margin-top: 2rem;
 	}
-	.dice-container{
-		top: 50%;
-		left: 80%;
-		transform: translate(-50%,-50%);
-		width: 15rem;
-		height: 15rem;
-	}
-	.dice-dot{
-		width: 2rem;
-		height: 2rem;
-	}
-	.face{
-		width: 15rem;
-		height: 15rem;
-	}
-}
-@media screen and (max-width: 700px){
-	.player{
-		display: flex;
-		flex-direction: column;
+	.canvas-container{
+		justify-content: right;
 		align-items: center;
 	}
-	.player-label{
-		margin-top: 40rem;
-		font-size: 5rem;
+	#canvas{
+		margin: 0 5rem 0 0;
 	}
-	#player1, #player2{
+	
+}
+@media screen and (max-width: 700px){
+	#player1{
 		width: 100vw;
 		height: 100vh;
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
-	#gamePannel{
-		top:  5%;
-		left: 50%;
+	#player2{
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		top: 0;
+		left: 0;
 	}
-	#playerPannel{
-		top: 45%;
-		left: 25%;
-		height: 11rem;
+	.hide{
+		display: none;
+		width: 0;
+		height: 0;
+	}
+	.player-label{
+		margin-top: 45rem;
+		font-size: 4.5rem;
 	}
 	.currentScore-container{
 		position: absolute;
-		top: 45%;
+		top: 52%;
 		left: 75%;
 		transform: translate(-50%,-50%);
 		margin: 0;
-		width: 18rem;
+		width: 17rem;
 		height: 11rem;
 	}
-	#player2{
-		display: none;
+	.canvas-container{
+		justify-content: center;
+		align-items: flex-start;
 	}
-	.dice-container{
-		top: 20%;
-		left: 50%;
-		transform: translate(-50%,-50%);
-		width: 15rem;
-		height: 15rem;
+	#canvas{
+		margin: 10rem 0 0 0;
 	}
-	.dice-dot{
-		width: 2rem;
-		height: 2rem;
+	#playerPannel{
+		top: 52%;
+		left: 25%;
 	}
-	.face{
-		width: 15rem;
-		height: 15rem;
+	.roll-btn{
+		margin-bottom: 4.5rem;
 	}
-}
 }
