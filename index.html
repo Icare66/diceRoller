@@ -15,40 +15,41 @@
 	<div class="main-container">
 		<!-- Game pannel -->
 		<div class="pannel-container" id="gamePannel">
-			<img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/fa314a/external-add-instagram-flatart-icons-outline-flatarticons.png"/>
+			<img id="start-btn" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/fa314a/external-add-instagram-flatart-icons-outline-flatarticons.png"/>
 			<span>new game</span>
 		</div>
 		<!-- Player 1 -->
 		<div class="player active-player" id="player1">
-			<h1 class="player-label">Player 1<span id="dot" class="dot dot-active"></span></h1>
-			<div class="globalScore">43</div>
+			<h1 class="player-label">Player 1<span id="dot_player1" class="dot dot-active"></span></h1>
+			<div class="globalScore" id="global_score_player_1">0</div>
 			<div class="currentScore-container">
 				<div class="label">Current</div>
-				<div class="score">43</div>
+				<div class="score" id="current_score_player_1">0</div>
 			</div>
 		</div>
 		<!-- Player 2 -->
 		<div class="player" id="player2">
-			<h1 class="player-label">Player 2<span id="dot" class="dot"></span></h1>
-			<div class="globalScore">72</div>
+			<h1 class="player-label">Player 2<span id="dot_player2" class="dot"></span></h1>
+			<div class="globalScore" id="global_score_player_2" >0</div>
 			<div class="currentScore-container">
 				<div class="label">Current</div>
-				<div class="score">0</div>
+				<div class="score" id="current_score_player_2">0</div>
 			</div>
 		</div>
 		<!-- Player pannel -->
 		<div class="pannel-container" id="playerPannel">
 			<div class="roll-btn">
-				<img src="https://img.icons8.com/ios/50/fa314a/update-left-rotation.png"/>
+				<img id="roll-btn" src="https://img.icons8.com/ios/50/fa314a/update-left-rotation.png"/>
 				<span>roll dice</span>
 			</div>
 			<div class="hold-btn">
-				<img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/fa314a/external-download-interface-kiranshastry-solid-kiranshastry.png"/>
+				<img id="hold-btn"src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/fa314a/external-download-interface-kiranshastry-solid-kiranshastry.png"/>
 				<span>hold</span>
 			</div>
 		</div>
 		<!-- Dice -->
 		<div class="dice-container">
+			<div id="start-face">?</div>
 			<div class="face" id="face1">
 				<span class="dice-dot"></span>
 			</div>
@@ -101,9 +102,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- <canvas id="canvas">
-	</canvas> -->
 	<script type="text/javascript" src="script.js"></script>
 
 </body>
