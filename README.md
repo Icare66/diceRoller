@@ -29,6 +29,6 @@ Le premier joueur qui atteint les 100 points sur global gagne le jeu.
 
 ### maquette 
 
-https://i.imgur.com/WgrX6NL.png
+![maquette](https://i.imgur.com/WgrX6NL.png)
 
 
