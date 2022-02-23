@@ -1,0 +1,234 @@
+@import '_base.sass'
+@import 'mixins.sass'
+$inactive: rgba(0, 0, 0,0.05)
+$active: rgba(215,215,215,1)
+$red: rgb(214, 69, 65)
+$boxShadow: 4px 1px 28px 5px rgba(191,191,191,0.57)
+$large_screen: "900px"
+
+.main-container
+	display: flex
+	@include respond(medium)
+		flex-direction: column
+		
+
+.player-container
+	width: 100vw
+	height: 100vh
+	display: flex
+	flex-direction: column
+	justify-content: space-around
+	align-items: center
+	background: $inactive
+	@include respond(medium)
+		flex-direction: row
+		height: 50vh
+	@include respond(small)
+		height: 100vh
+		position: absolute
+		top: 0
+		left: 0
+		flex-direction: column
+		justify-content: space-between
+	.hide
+		display: none
+		opacity: 0
+
+
+.active-player
+	background: $active
+	z-index: 5
+	transition: all 1s ease
+
+
+.sub-container
+	text-align: center
+	@include respond(small)
+		position: relative
+		top: 9%
+
+.player-label
+	font-size: 7rem
+	font-weight: 200
+	text-transform: uppercase
+	display: flex
+	align-items: center
+	@include respond(medium)
+		font-size: 5rem
+	@include respond(small)
+		font-size: 3rem
+		font-weight: 400
+
+.dot
+	content: ""
+	width: 2.5rem
+	height: 2.5rem
+	border-radius: 50%
+	background: transparent
+	margin-left: 3rem
+
+.dot-active
+	background: $red
+	transition: all 1s ease
+
+.score
+	margin-right: 2.5rem
+	justify-self: center
+	font-size: 11rem
+	font-weight: 200
+	color: $red
+	@include respond(medium)
+		font-size: 9rem
+	@include respond(small)
+		font-size: 6rem
+
+.round-container
+	text-align: center
+	background: $red
+	width: 20rem
+	height: 13rem
+	border-radius: 0.3rem
+	display: flex
+	flex-direction: column
+	justify-content: space-around
+	box-shadow: $boxShadow
+	@include respond(medium)
+		transform: scale(0.8)
+	@include respond(small)
+		transform: scale(0.8)
+		position: relative
+		bottom: 6%
+.round-label
+	font-weight: 500
+	font-size: 2.2rem
+	text-transform: uppercase
+
+.round
+	font-size: 5.5rem
+	color: white
+	font-weight: 200
+
+.pannel-container
+	z-index: 5
+	position: absolute
+	top: 0
+	left: 0
+	width: 100vw
+	height: 100vh
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+	align-items: center
+	@include respond(medium)
+		flex-direction: row-reverse
+	@include respond(small)
+		flex-direction: column
+		justify-content: flex-start
+		align-items: space-between
+		
+
+.btn-container
+	display: flex
+	align-items: center
+	font-size: 2.8rem
+	text-transform: uppercase
+	@include respond(medium)
+		font-size: 2.2rem
+	@include respond(small)
+		font-size: 1.5rem
+	img
+		margin-right: 2rem
+		width: 4rem
+		@include respond(medium)
+			margin-right: 1rem
+
+		&:hover
+			transform: scale(1.3)
+			transition: transform 1s ease
+
+#rollContainer
+	margin-bottom: 4rem
+	@include respond(medium)
+		margin-bottom: 4rem
+	@include respond(small)
+		margin-bottom: 2.5rem
+	#rollButton:hover
+		@include rotate(360deg)
+
+.rollHold-container
+	position: relative
+	bottom: 16%
+	@include respond(medium)
+		bottom: 0
+		left: 5%
+	@include respond(small)
+		left: 0
+		top: 23%
+
+#startContainer
+	position: relative
+	top: 5%
+	@include respond(medium)
+		top: 0
+		right: 5%
+	@include respond(small)
+		right: 0
+		top: 2%
+.canvas-container
+	z-index: 6
+	position: absolute
+	top: 35%
+	left: 50%
+	width: 20rem
+	height: 20rem
+	transform: translate(-50%,-50%)
+	@include respond(medium)
+		top: 50%
+	@include respond(small)
+		top: 60%
+		width: 15rem
+		height: 15rem
+#canvas
+	width: 20rem
+	height: 20rem
+	background: white
+	border-radius: 2.5rem
+	box-shadow: $boxShadow
+	@include respond(medium)
+		width: 17rem
+		height: 17rem
+	@include respond(small)
+		width: 15em
+		height: 15rem
+		border-radius: 1.7rem
+.rotate
+	animation: rotateDice 1s ease
+
+@keyframes rotateDice
+	0% 
+		@include rotate(0)
+	100% 
+		@include rotate(360deg)
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
