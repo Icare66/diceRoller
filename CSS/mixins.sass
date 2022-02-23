@@ -5,6 +5,44 @@
 	-o-transform: rotate($deg)
 	transform:  rotate($deg)
 
+@mixin transition($parameters...)
+	-webkit-transition: $parameters
+	-moz-transition: $parameters
+	-ms-transition: $parameters
+	transition: $parameters
+
+@mixin opacity($parameter)
+	opacity: $parameter
+	filter: alpha(opacity=($parameter * 100))
+
+@mixin box-shadow( $h: 10px , $v: 10px , $b: 0px , $s: 0px , $c: #000000 )
+	-webkit-box-shadow: $h $v $b $s $c
+	-moz-box-shadow: $h $v $b $s $c
+	box-shadow: $h $v $b $s $c
+
+
+@mixin set-position($position,$top,$left,$right,$bottom)
+	position: $position
+	top: $top
+	left: $left
+	right: $right
+	bottom: $bottom
+
+@mixin absolute-center
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%,-50%)
+
+@mixin absolute-origin
+	position: absolute
+	top: 0
+	left: 0
+
+@mixin width-height($w,$h)
+	width: $w
+	height: $h
+ 
 @mixin respond($breakpoint)
 	@if $breakpoint==medium
 		@media only screen and (max-width: 900px)
@@ -12,3 +50,29 @@
 	@if $breakpoint==small
 		@media only screen and (max-width: 600px)
 			@content
+
+@mixin keyframes($animationName)
+	@-webkit-keyframes #{$animationName}
+		@content
+
+	@-moz-keyframes #{$animationName}
+		@content
+
+	@-o-keyframes #{$animationName}
+		@content
+
+	@keyframes #{$animationName}
+		@content
+
+@mixin flexContainer($direction, $justify, $align)
+	display: flex
+	flex-direction: $direction
+	justify-content: $justify
+	align-items: $align
+
+@mixin textOption($fontSize,$fontWeight,$textTransform,$textColor)
+	font-size: $fontSize
+	font-weight: $fontWeight
+	text-transform: $textTransform
+	color: $textColor
+    

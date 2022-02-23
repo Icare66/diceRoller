@@ -30,7 +30,8 @@ body {
       flex-direction: column; } }
 
 .blurred {
-  opacity: 0.7; }
+  opacity: 0.7;
+  filter: alpha(opacity=70); }
 
 .player-container {
   width: 100vw;
@@ -50,17 +51,44 @@ body {
       position: absolute;
       top: 0;
       left: 0;
+      display: flex;
       flex-direction: column;
       justify-content: space-between; } }
   .player-container .hide {
-    display: none;
-    opacity: 0; }
+    display: none; }
 
 .active-player {
   background: #d2d2d2;
   z-index: 5;
-  transition: background 0.5s ease-out; }
-
+  animation: anim 1s cubic-bezier(0.24, 0.83, 0.69, 0.89); }
+@-webkit-keyframes anim {
+  0% {
+    background: #d2d2d2; }
+  50% {
+    background: rgba(180, 180, 180, 0.8); }
+  100% {
+    background: #d2d2d2; } }
+@-moz-keyframes anim {
+  0% {
+    background: #d2d2d2; }
+  50% {
+    background: rgba(180, 180, 180, 0.8); }
+  100% {
+    background: #d2d2d2; } }
+@-o-keyframes anim {
+  0% {
+    background: #d2d2d2; }
+  50% {
+    background: rgba(180, 180, 180, 0.8); }
+  100% {
+    background: #d2d2d2; } }
+@keyframes anim {
+  0% {
+    background: #d2d2d2; }
+  50% {
+    background: rgba(180, 180, 180, 0.8); }
+  100% {
+    background: #d2d2d2; } }
 .sub-container {
   text-align: center; }
   @media only screen and (max-width: 600px) {
@@ -72,15 +100,17 @@ body {
   font-size: 7rem;
   font-weight: 200;
   text-transform: uppercase;
+  color: black;
   display: flex;
-  align-items: center; }
+  flex-direction: row;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: black; }
   @media only screen and (max-width: 900px) {
     .player-label {
       font-size: 5rem; } }
-  @media only screen and (max-width: 600px) {
-    .player-label {
-      font-size: 3rem;
-      font-weight: 400; } }
 
 .dot {
   content: "";
@@ -92,14 +122,17 @@ body {
 
 .dot-active {
   background: #d64541;
+  -webkit-transition: background 1s ease;
+  -moz-transition: background 1s ease;
+  -ms-transition: background 1s ease;
   transition: background 1s ease; }
 
 .score {
-  margin-right: 2.5rem;
-  justify-self: center;
   font-size: 11rem;
   font-weight: 200;
-  color: #d64541; }
+  color: #d64541;
+  margin-right: 2.5rem;
+  justify-self: center; }
   @media only screen and (max-width: 900px) {
     .score {
       font-size: 9rem; } }
@@ -116,7 +149,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57); }
+  -webkit-box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000;
+  -moz-box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000;
+  box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000; }
   @media only screen and (max-width: 900px) {
     .round-container {
       transform: scale(0.8); } }
@@ -127,14 +162,15 @@ body {
       bottom: 10%; } }
 
 .round-label {
-  font-weight: 500;
   font-size: 2.2rem;
-  text-transform: uppercase; }
+  font-weight: 500;
+  text-transform: uppercase;
+  color: black; }
 
 .round {
   font-size: 5.5rem;
-  color: white;
-  font-weight: 200; }
+  font-weight: 200;
+  color: white; }
 
 .pannel-container {
   z-index: 5;
@@ -152,6 +188,7 @@ body {
       flex-direction: row-reverse; } }
   @media only screen and (max-width: 600px) {
     .pannel-container {
+      display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: space-between; } }
@@ -159,8 +196,9 @@ body {
 .btn-container {
   display: flex;
   align-items: center;
-  font-size: 2.8rem;
-  text-transform: uppercase; }
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: black; }
   @media only screen and (max-width: 900px) {
     .btn-container {
       font-size: 2.2rem; } }
@@ -240,20 +278,61 @@ body {
   height: 20rem;
   background: white;
   border-radius: 2.5rem;
-  box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57); }
+  -webkit-box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000;
+  -moz-box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000;
+  box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000; }
   @media only screen and (max-width: 900px) {
     #canvas {
       width: 17rem;
       height: 17rem; } }
   @media only screen and (max-width: 600px) {
     #canvas {
-      width: 15em;
+      width: 15rem;
       height: 15rem;
       border-radius: 1.7rem; } }
 
 .rotate {
   animation: rotateDice 1s ease; }
 
+@-webkit-keyframes rotateDice {
+  0% {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+    transform: rotate(0); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@-moz-keyframes rotateDice {
+  0% {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+    transform: rotate(0); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@-o-keyframes rotateDice {
+  0% {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+    transform: rotate(0); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
 @keyframes rotateDice {
   0% {
     -webkit-transform: rotate(0);
@@ -273,19 +352,23 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50rem;
-  border-radius: 1rem;
-  box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57);
   height: 15rem;
-  background: #d64541;
-  z-index: 7;
-  opacity: 0.95;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   font-size: 4rem;
   font-weight: 300;
   text-transform: uppercase;
   color: white;
+  border-radius: 1rem;
+  box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57);
+  background: #d64541;
+  z-index: 7;
+  opacity: 0.95;
+  -webkit-transition: opacity 1s ease-out;
+  -moz-transition: opacity 1s ease-out;
+  -ms-transition: opacity 1s ease-out;
   transition: opacity 1s ease-out; }
   @media only screen and (max-width: 900px) {
     .win-box {
@@ -315,6 +398,45 @@ body {
   .loading-screen #loadImage {
     width: 10rem;
     animation: rotation 0.8s infinite linear; }
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -ms-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg); } }
+@-moz-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -ms-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg); } }
+@-o-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -ms-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg); } }
 @keyframes rotation {
   from {
     -webkit-transform: rotate(0deg);

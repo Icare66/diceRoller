@@ -1,3 +1,4 @@
+//Display
 var container1 = document.getElementById('player1');
 var container2 = document.getElementById('player2');
 var dotPlayer1 = document.getElementById('dotPlayer1');
@@ -5,17 +6,24 @@ var dotPlayer2 = document.getElementById('dotPlayer2');
 var scorePlayer1 = document.getElementById('scorePlayer1');
 var scorePlayer2 = document.getElementById('scorePlayer2');
 var loadingScreen = document.getElementById('loadingScreen');
-var rollButton = document.getElementById('rollButton');
-var holdButton = document.getElementById('holdButton');
-var restartButton = document.getElementById('start-btn');
 var roundPlayer1 = document.getElementById('roundPlayer1');
 var roundPlayer2 = document.getElementById('roundPlayer2');
 var scorePlayer1 = document.getElementById('scorePlayer1');
 var scorePlayer2 = document.getElementById('scorePlayer2');
 var winBox = document.getElementById('winBox');
+
+//Buttons
+var rollButton = document.getElementById('rollButton');
+var holdButton = document.getElementById('holdButton');
+var restartButton = document.getElementById('start-btn');
+
+
+//Audio
 var rollSound = document.getElementById('rollSound');
 var holdSound = document.getElementById('holdSound');
 var winSound = document.getElementById('winSound');
+var loseSound = document.getElementById('loseSound');
+
 
 //Create canvas element and context
 var canvas = document.getElementById('canvas');
@@ -23,15 +31,20 @@ var context = canvas.getContext('2d');
 
 //Load assets -- image and sound
 var assetsLoaded=0;
+var assetsToLoad = 5;
+
 var image = new Image();
 image.addEventListener('load', loadAssets);
 image.src = "images/diceImage.png";
+
 rollSound.addEventListener("canplaythrough", loadAssets);
 rollSound.load();
 holdSound.addEventListener("canplaythrough", loadAssets);
 holdSound.load();
 winSound.addEventListener("canplaythrough", loadAssets);
 winSound.load();
+loseSound.addEventListener("canplaythrough", loadAssets);
+loseSound.load();
 
 //Game variable
 var scoreToWin=100;
@@ -54,12 +67,15 @@ class Player{
 		dice.updateFace(RAND);
 		if(RAND === 1){
 			this.ROUND=0;
+			loseSound.currentTime =0;
+			loseSound.volume = 0.2;
+			loseSound.play();
 		}else{
 			this.ROUND += RAND;
 		}
 	}
 	hold(){
-		holdSound.currentTime =1;
+		holdSound.currentTime =0;
 		holdSound.play();
 		this.SCORE += this.ROUND;
 		if(this.SCORE >= scoreToWin){
@@ -99,6 +115,7 @@ function roll(){
 	canvas.classList.remove('rotate'); // unset the rotate class
 	activePlayer.roll();
 	if(activePlayer.ROUND ===0){
+		displayScore();
 		nextPlayer();
 		displayActive();
 	}else{
@@ -149,11 +166,12 @@ function gameLoop(){
 //Game start when assets are loaded
 function loadAssets(){
 	assetsLoaded++;
-	if(assetsLoaded === 4){ //check if all assets are loaded
+	if(assetsLoaded === 5){ //check if all 5 assets are loaded
 		image.removeEventListener('load',loadAssets);
 		rollSound.removeEventListener("canplaythrough", loadAssets);
 		holdSound.removeEventListener("canplaythrough", loadAssets);
 		winSound.removeEventListener("canplaythrough", loadAssets);
+		loseSound.removeEventListener("canplaythrough", loadAssets);
 		setTimeout(function(){gameState = PLAYING;},700);
 	}else{
 		gameState=LOADING;
@@ -228,6 +246,7 @@ function endGame(){
 //Create a DIV and display the winner
 function displayWinner(winner){
 	winSound.currentTime =0;
+	winSound.volume = 0.3;
 	winSound.play();
 	var winBox = document.createElement('div');
 	var content = document.createTextNode(`Le joueur ${winner} a gagné !`);

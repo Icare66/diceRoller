@@ -12,35 +12,32 @@ $large_screen: "900px"
 		flex-direction: column
 		
 .blurred
-	opacity: 0.7
+	@include opacity(0.7)
 .player-container
-	width: 100vw
-	height: 100vh
-	display: flex
-	flex-direction: column
-	justify-content: space-around
-	align-items: center
+	@include width-height(100vw,100vh)
+	@include flexContainer(column,space-around,center)
 	background: $inactive
 	@include respond(medium)
 		flex-direction: row
 		height: 50vh
 	@include respond(small)
 		height: 100vh
-		position: absolute
-		top: 0
-		left: 0
-		flex-direction: column
-		justify-content: space-between
+		@include absolute-origin
+		@include flexContainer(column,space-between,null)
 	.hide
 		display: none
-		opacity: 0
-
 
 .active-player
 	background: $active
 	z-index: 5
-	transition: background 0.5s ease-out
-
+	animation: anim 1s cubic-bezier(.24,.83,.69,.89)
+	@include keyframes(anim)
+		0%
+			background: $active
+		50%
+			background: rgba(180,180,180,0.8)
+		100%
+			background: $active
 
 .sub-container
 	text-align: center
@@ -49,35 +46,28 @@ $large_screen: "900px"
 		top: 9%
 
 .player-label
-	font-size: 7rem
-	font-weight: 200
-	text-transform: uppercase
-	display: flex
-	align-items: center
+	@include textOption(7rem,200,uppercase,black)
+	@include flexContainer(row,null,center)
 	@include respond(medium)
 		font-size: 5rem
 	@include respond(small)
-		font-size: 3rem
-		font-weight: 400
+	@include textOption(3rem,400,uppercase,black)
 
 .dot
 	content: ""
-	width: 2.5rem
-	height: 2.5rem
+	@include width-height(2.5rem,2.5rem)
 	border-radius: 50%
 	background: transparent
 	margin-left: 3rem
 
 .dot-active
 	background: $red
-	transition: background 1s ease
+	@include transition(background 1s ease)
 
 .score
+	@include textOption(11rem,200,null,$red)
 	margin-right: 2.5rem
 	justify-self: center
-	font-size: 11rem
-	font-weight: 200
-	color: $red
 	@include respond(medium)
 		font-size: 9rem
 	@include respond(small)
@@ -86,13 +76,10 @@ $large_screen: "900px"
 .round-container
 	text-align: center
 	background: $red
-	width: 20rem
-	height: 13rem
+	@include width-height(20rem,13rem)
 	border-radius: 0.5rem
-	display: flex
-	flex-direction: column
-	justify-content: space-around
-	box-shadow: $boxShadow
+	@include flexContainer(column,space-around,null)
+	@include box-shadow($boxShadow)
 	@include respond(medium)
 		transform: scale(0.8)
 	@include respond(small)
@@ -100,38 +87,24 @@ $large_screen: "900px"
 		position: relative
 		bottom: 10%
 .round-label
-	font-weight: 500
-	font-size: 2.2rem
-	text-transform: uppercase
+	@include textOption(2.2rem,500,uppercase,black)
 
 .round
-	font-size: 5.5rem
-	color: white
-	font-weight: 200
+	@include textOption(5.5rem,200,null,white)
 
 .pannel-container
 	z-index: 5
-	position: absolute
-	top: 0
-	left: 0
-	width: 100vw
-	height: 100vh
-	display: flex
-	flex-direction: column
-	justify-content: space-between
-	align-items: center
+	@include absolute-origin
+	@include width-height(100vw,100vh)
+	@include flexContainer(column, space-between,center)
 	@include respond(medium)
 		flex-direction: row-reverse
 	@include respond(small)
-		flex-direction: column
-		justify-content: flex-start
-		align-items: space-between
+		@include flexContainer(column,flex-start,space-between)
 		
 .btn-container
-	display: flex
-	align-items: center
-	font-size: 2.8rem
-	text-transform: uppercase
+	@include flexContainer(null,null,center)
+	@include textOption(2.5rem,null,uppercase,black)
 	@include respond(medium)
 		font-size: 2.2rem
 	@include respond(small)
@@ -142,7 +115,6 @@ $large_screen: "900px"
 		width: 4rem
 		@include respond(medium)
 			margin-right: 1rem
-
 		&:hover
 			transform: scale(1.5)
 			transition: transform 0.5s ease
@@ -178,87 +150,65 @@ $large_screen: "900px"
 		top: 2%
 .canvas-container
 	z-index: 6
-	position: absolute
-	top: 35%
-	left: 50%
-	width: 20rem
-	height: 20rem
+	@include set-position(absolute,35%,50%,null,null)
+	@include width-height(20rem,20rem)
 	transform: translate(-50%,-50%)
 	@include respond(medium)
 		top: 50%
 	@include respond(small)
 		top: 57%
-		width: 15rem
-		height: 15rem
+		@include width-height(15rem,15rem)
+
 #canvas
-	width: 20rem
-	height: 20rem
+	@include width-height(20rem,20rem)
 	background: white
 	border-radius: 2.5rem
-	box-shadow: $boxShadow
+	@include box-shadow($boxShadow)
 	@include respond(medium)
-		width: 17rem
-		height: 17rem
+		@include width-height(17rem,17rem)
 	@include respond(small)
-		width: 15em
-		height: 15rem
+		@include width-height(15rem,15rem)
 		border-radius: 1.7rem
 .rotate
 	animation: rotateDice 1s ease
 
-@keyframes rotateDice
+@include keyframes(rotateDice)
 	0% 
 		@include rotate(0)
 	100% 
 		@include rotate(360deg)
 
 .win-box
-	position: absolute
-	top: 50%
-	left: 50%
-	transform: translate(-50%,-50%)
-	width: 50rem
+	@include absolute-center
+	@include width-height(50rem,15rem)
+	@include flexContainer(row,center,center)
+	@include textOption(4rem,300,uppercase,white)
 	border-radius: 1rem
 	box-shadow: $boxShadow
-	height: 15rem
 	background: $red
 	z-index: 7
 	opacity: 0.95
-	display: flex
-	justify-content: center
-	align-items: center
-	font-size: 4rem
-	font-weight: 300
-	text-transform: uppercase
-	color: white
-	transition: opacity 1s ease-out
+	@include transition(opacity 1s ease-out)
 	@include respond(medium)
 			top: 10%
-			width: 32rem
-			height: 8rem
+			@include width-height(32rem,8rem)
 			font-size: 2.5rem
 			@include respond(medium)
-					top: 50%
+				top: 50%
 #loading-screen
 	display: none
 .loading-screen
 	display: block
-	position: absolute
-	top: 0
-	left: 0
-	width: 100vw
-	height: 100vh
+	@include absolute-origin
+	@include width-height(100vw,100vh)
 	background: rgba(240,240,240,1)
 	z-index: 10
-	display: flex
-	justify-content: center
-	align-items: center
+	@include flexContainer(null,center,center)
 
 	#loadImage
 		width: 10rem
 		animation: rotation 0.8s infinite linear
-
-		@keyframes rotation
+		@include keyframes(rotation)
 			from
 				@include rotate(0deg)
 			to
