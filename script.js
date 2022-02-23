@@ -62,6 +62,7 @@ class Player{
 	//Methods
 	roll(){
 		rollSound.currentTime =0;
+		rollSound.volume = 0.2;
 		rollSound.play();
 		let RAND = Math.floor(Math.random() * 6) +1;
 		dice.updateFace(RAND);
