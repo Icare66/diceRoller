@@ -1,7 +1,7 @@
 # JavaScript Dice Roller
 
 Projet réalisé dans le cadre de ma formation
-###[live demo](https://marinvcq.github.io/diceRoller/)
+### [live demo](https://marinvcq.github.io/diceRoller/)
 
 ## Livrable attendu
 
