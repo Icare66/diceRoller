@@ -60,11 +60,10 @@ class Player{
 	WIN=false;
 
 	//Methods
-	roll(){
+	roll(RAND){
 		rollSound.currentTime =0;
 		rollSound.volume = 0.2;
 		rollSound.play();
-		let RAND = Math.floor(Math.random() * 6) +1;
 		dice.updateFace(RAND);
 		if(RAND === 1){
 			this.ROUND=0;
@@ -112,9 +111,10 @@ function debounceButton(button){
 
 //Roll Function
 function roll(){
+	let RAND = Math.floor(Math.random() * 6) +1;
 	debounceButton(rollButton);
 	canvas.classList.remove('rotate'); // unset the rotate class
-	activePlayer.roll();
+	activePlayer.roll(RAND);
 	if(activePlayer.ROUND ===0){
 		displayScore();
 		nextPlayer();
