@@ -1,7 +1,7 @@
 @import '_base.sass'
 @import 'mixins.sass'
 $inactive: rgba(0, 0, 0,0.05)
-$active: rgba(215,215,215,1)
+$active: rgba(210,210,210,1)
 $red: rgb(214, 69, 65)
 $boxShadow: 4px 1px 28px 5px rgba(191,191,191,0.57)
 $large_screen: "900px"
@@ -11,7 +11,8 @@ $large_screen: "900px"
 	@include respond(medium)
 		flex-direction: column
 		
-
+.blurred
+	opacity: 0.7
 .player-container
 	width: 100vw
 	height: 100vh
@@ -38,7 +39,7 @@ $large_screen: "900px"
 .active-player
 	background: $active
 	z-index: 5
-	transition: all 1s ease
+	transition: background 0.5s ease-out
 
 
 .sub-container
@@ -69,7 +70,7 @@ $large_screen: "900px"
 
 .dot-active
 	background: $red
-	transition: all 1s ease
+	transition: background 1s ease
 
 .score
 	margin-right: 2.5rem
@@ -87,7 +88,7 @@ $large_screen: "900px"
 	background: $red
 	width: 20rem
 	height: 13rem
-	border-radius: 0.3rem
+	border-radius: 0.5rem
 	display: flex
 	flex-direction: column
 	justify-content: space-around
@@ -95,9 +96,9 @@ $large_screen: "900px"
 	@include respond(medium)
 		transform: scale(0.8)
 	@include respond(small)
-		transform: scale(0.8)
+		transform: scale(0.7)
 		position: relative
-		bottom: 6%
+		bottom: 10%
 .round-label
 	font-weight: 500
 	font-size: 2.2rem
@@ -126,7 +127,6 @@ $large_screen: "900px"
 		justify-content: flex-start
 		align-items: space-between
 		
-
 .btn-container
 	display: flex
 	align-items: center
@@ -137,14 +137,15 @@ $large_screen: "900px"
 	@include respond(small)
 		font-size: 1.5rem
 	img
+		pointer-events: all
 		margin-right: 2rem
 		width: 4rem
 		@include respond(medium)
 			margin-right: 1rem
 
 		&:hover
-			transform: scale(1.3)
-			transition: transform 1s ease
+			transform: scale(1.5)
+			transition: transform 0.5s ease
 
 #rollContainer
 	margin-bottom: 4rem
@@ -153,7 +154,8 @@ $large_screen: "900px"
 	@include respond(small)
 		margin-bottom: 2.5rem
 	#rollButton:hover
-		@include rotate(360deg)
+		@include rotate(180deg)
+		transition: transform 0.5s ease-out
 
 .rollHold-container
 	position: relative
@@ -163,7 +165,7 @@ $large_screen: "900px"
 		left: 5%
 	@include respond(small)
 		left: 0
-		top: 23%
+		top: 21%
 
 #startContainer
 	position: relative
@@ -185,7 +187,7 @@ $large_screen: "900px"
 	@include respond(medium)
 		top: 50%
 	@include respond(small)
-		top: 60%
+		top: 57%
 		width: 15rem
 		height: 15rem
 #canvas
@@ -210,8 +212,59 @@ $large_screen: "900px"
 	100% 
 		@include rotate(360deg)
 
+.win-box
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%,-50%)
+	width: 50rem
+	border-radius: 1rem
+	box-shadow: $boxShadow
+	height: 15rem
+	background: $red
+	z-index: 7
+	opacity: 0.95
+	display: flex
+	justify-content: center
+	align-items: center
+	font-size: 4rem
+	font-weight: 300
+	text-transform: uppercase
+	color: white
+	transition: opacity 1s ease-out
+	@include respond(medium)
+			top: 10%
+			width: 32rem
+			height: 8rem
+			font-size: 2.5rem
+			@include respond(medium)
+					top: 50%
+#loading-screen
+	display: none
+.loading-screen
+	display: block
+	position: absolute
+	top: 0
+	left: 0
+	width: 100vw
+	height: 100vh
+	background: rgba(240,240,240,1)
+	z-index: 10
+	display: flex
+	justify-content: center
+	align-items: center
 
-	
+	#loadImage
+		width: 10rem
+		animation: rotation 0.8s infinite linear
+
+		@keyframes rotation
+			from
+				@include rotate(0deg)
+			to
+				@include rotate(-360deg)
+
+
 
 
 

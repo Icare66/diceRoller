@@ -7,7 +7,8 @@
 	<title>test</title>
 </head>
 <body>
-	<div class="main-container">
+	<div class="" id="loadingScreen"><img id="loadImage" src="https://img.icons8.com/ios/50/fa314a/update-left-rotation.png"/></div>
+	<div class="main-container" id="main">
 		<!-- PLAYER 1 -->
 		<div class="player-container active-player" id="player1">
 			<div class="sub-container">
@@ -35,17 +36,17 @@
 		<div class="pannel-container">
 			<!-- restart btn -->
 			<div class="btn-container" id="startContainer">
-				<img id="start-btn" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/fa314a/external-add-instagram-flatart-icons-outline-flatarticons.png"/>
+				<img id="start-btn" onclick='restart()' src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/fa314a/external-add-instagram-flatart-icons-outline-flatarticons.png"/>
 				<span>new game</span>
 			</div>
 			<!-- Roll and Hold btn -->
 			<div class="rollHold-container">
 				<div class="btn-container" id="rollContainer">
-					<img id="rollButton" src="https://img.icons8.com/ios/50/fa314a/update-left-rotation.png"/>
+					<img id="rollButton" onclick="roll()" src="https://img.icons8.com/ios/50/fa314a/update-left-rotation.png"/>
 					<span>roll dice</span>
 				</div>
 				<div class="btn-container" id="holdContainer">
-					<img id="holdButton"src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/fa314a/external-download-interface-kiranshastry-solid-kiranshastry.png"/>
+					<img id="holdButton"onclick='hold()'src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/fa314a/external-download-interface-kiranshastry-solid-kiranshastry.png"/>
 					<span>hold</span>
 				</div>
 			</div>
@@ -57,6 +58,11 @@
 	<div class="canvas-container">
 		<canvas id="canvas"></canvas>
 	</div>
+
+	<!-- Audio -->
+	<audio id="rollSound"><source src="sounds/rollSound.mp3" type="audio/mpeg"></audio>
+	<audio id="holdSound"><source src="sounds/holdSound.mp3" type="audio/mpeg"></audio>
+	<audio id="winSound"><source src="sounds/winSound.wav" type="audio/wav"></audio>
 
 
 	<!-- External script -->

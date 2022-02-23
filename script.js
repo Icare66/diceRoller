@@ -1,30 +1,46 @@
-(function(){
 var container1 = document.getElementById('player1');
 var container2 = document.getElementById('player2');
 var dotPlayer1 = document.getElementById('dotPlayer1');
 var dotPlayer2 = document.getElementById('dotPlayer2');
 var scorePlayer1 = document.getElementById('scorePlayer1');
 var scorePlayer2 = document.getElementById('scorePlayer2');
+var loadingScreen = document.getElementById('loadingScreen');
 var rollButton = document.getElementById('rollButton');
 var holdButton = document.getElementById('holdButton');
-var startButton = document.getElementById('start-btn');
+var restartButton = document.getElementById('start-btn');
 var roundPlayer1 = document.getElementById('roundPlayer1');
 var roundPlayer2 = document.getElementById('roundPlayer2');
 var scorePlayer1 = document.getElementById('scorePlayer1');
 var scorePlayer2 = document.getElementById('scorePlayer2');
-var canvas = document.getElementById('canvas');
+var winBox = document.getElementById('winBox');
+var rollSound = document.getElementById('rollSound');
+var holdSound = document.getElementById('holdSound');
+var winSound = document.getElementById('winSound');
 
-//Dice Object
-var dice ={
-	SIZE: 200, //Size of one face on the image
-	COLUMNS: 6,
-	sourceX:0,
-	sourceY:0,
-	updateFace(face){
-		this.sourceX = ((face-1) % this.COLUMNS) * this.SIZE;
-	}
-}
-//Player class
+//Create canvas element and context
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+//Load assets -- image and sound
+var assetsLoaded=0;
+var image = new Image();
+image.addEventListener('load', loadAssets);
+image.src = "images/diceImage.png";
+rollSound.addEventListener("canplaythrough", loadAssets);
+rollSound.load();
+holdSound.addEventListener("canplaythrough", loadAssets);
+holdSound.load();
+winSound.addEventListener("canplaythrough", loadAssets);
+winSound.load();
+
+//Game variable
+var scoreToWin=100;
+var LOADING=0;
+var PLAYING=1;
+var OVER=2;
+var gameState = LOADING;
+
+//Class player
 class Player{
 	ROUND =0;
 	SCORE =0;
@@ -32,8 +48,9 @@ class Player{
 
 	//Methods
 	roll(){
-		canvas.classList.remove('rotate'); // unset the rotate class
-		let RAND = Math.floor(Math.random() * 5) +1;
+		rollSound.currentTime =0;
+		rollSound.play();
+		let RAND = Math.floor(Math.random() * 6) +1;
 		dice.updateFace(RAND);
 		if(RAND === 1){
 			this.ROUND=0;
@@ -42,42 +59,108 @@ class Player{
 		}
 	}
 	hold(){
+		holdSound.currentTime =1;
+		holdSound.play();
 		this.SCORE += this.ROUND;
+		if(this.SCORE >= scoreToWin){
+			this.SCORE = scoreToWin;
+			this.WIN = true;
+		}
 		this.ROUND=0;
 	}
-	testWin(){
-		if(this.SCORE >= 100){
-			this.SCORE=100;
-			this.WIN=true;
-		}
+}
+
+//Dice Object
+var dice ={
+	SIZE: 200,
+	COLUMNS: 6,
+	sourceX:0,
+	updateFace(face){
+		this.sourceX = ((face-1) % this.COLUMNS) * this.SIZE;
 	}
 }
-//Functions
-function imageLoaded(){
-	window.requestAnimationFrame(imageLoaded, canvas);
-	render();
+
+//Create Players
+var player1 = new Player(); 
+var player2 = new Player();
+var activePlayer = player1;
+
+//Limit ROll and Hold callback
+function debounceButton(button){
+	button.style.pointerEvents = "none";
+	setTimeout(function(){
+		button.style.pointerEvents = "all";
+	},800);
 }
 
-function render(){
-	drawingSurface.clearRect(0,0,canvas.width,canvas.height);
-	drawingSurface.drawImage(image, dice.sourceX,0,200, 200, 0,0,canvas.width, canvas.height);
-	canvas.classList.add('rotate'); //Set the rotate class
-}
-
-function clickRoll(){
+//Roll Function
+function roll(){
+	debounceButton(rollButton);
+	canvas.classList.remove('rotate'); // unset the rotate class
 	activePlayer.roll();
 	if(activePlayer.ROUND ===0){
-		displayRound(); //Reset the round on screen
 		nextPlayer();
-		displayBg();
+		displayActive();
 	}else{
-		activePlayer.testWin();
-		if(activePlayer.WIN === true){
-			/*gamestate=OVER;*/
-		}
-		displayRound();
+		displayScore();
 	}
 }
+//Hold Function
+function hold(){
+	debounceButton(holdButton);
+	activePlayer.hold();
+	displayScore();
+	nextPlayer();
+	displayActive();	
+}
+
+//restart function
+function restart(){
+	gameState= LOADING;
+	history.go(0);
+}
+
+//Start game Loop
+gameLoop();
+
+function gameLoop(){
+	let request = requestAnimationFrame(gameLoop, canvas);
+	switch (gameState) {
+		case LOADING:
+			loadingScreen.classList.add('loading-screen');
+			break;
+		case PLAYING:
+			loadingScreen.style.display = "none";
+			render();
+			break;
+		case OVER:
+			cancelAnimationFrame(request);
+			endGame();
+			break;
+		default:
+			console.log('loading assets...');
+			break;
+	}
+	if(player1.WIN || player2.WIN){
+		gameState = OVER;
+	}
+}
+
+//Game start when assets are loaded
+function loadAssets(){
+	assetsLoaded++;
+	if(assetsLoaded === 4){ //check if all assets are loaded
+		image.removeEventListener('load',loadAssets);
+		rollSound.removeEventListener("canplaythrough", loadAssets);
+		holdSound.removeEventListener("canplaythrough", loadAssets);
+		winSound.removeEventListener("canplaythrough", loadAssets);
+		setTimeout(function(){gameState = PLAYING;},700);
+	}else{
+		gameState=LOADING;
+	}
+}
+
+//Swap players
 function nextPlayer(){
 	if(Object.is(activePlayer, player1)){
 		activePlayer = player2;
@@ -88,15 +171,19 @@ function nextPlayer(){
 	}
 }
 
-function displayRound(){
+//Display score on screen
+function displayScore(){
 	if(Object.is(activePlayer, player1)){
 		roundPlayer1.innerHTML = activePlayer.ROUND;
+		scorePlayer1.innerHTML = activePlayer.SCORE
 	}else{
 		roundPlayer2.innerHTML = activePlayer.ROUND;
+		scorePlayer2.innerHTML = activePlayer.SCORE;
 	}
 }
 
-function displayBg(){
+//Display CSS active class on active player
+function displayActive(){
 	if(Object.is(activePlayer, player1)){
 		container2.classList.remove("active-player");
 		container1.classList.add("active-player");
@@ -110,15 +197,8 @@ function displayBg(){
 	}
 }
 
-function displayScore(){
-	if(Object.is(activePlayer, player1)){
-		scorePlayer1.innerHTML = activePlayer.SCORE;
-	}else {
-		scorePlayer2.innerHTML = activePlayer.SCORE;
-	}
-}
-
-function setClassHide(){ // For mobile-screen only
+//Swap screen for MOBILE ONLY
+function setClassHide(){
 	if(window.screen.width <=600){
 		if(Object.is(activePlayer, player1)){
 			container1.classList.remove('hide');
@@ -133,37 +213,35 @@ function setClassHide(){ // For mobile-screen only
 	}
 }
 
-// MAIN PROGRAM
+//Call winner's display function and disable buttons
+function endGame(){
+	rollButton.onclick = null;
+	holdButton.onclick = null;
 
-var drawingSurface = canvas.getContext('2d'); //Create the drawing Surface
+	if(player1.WIN === true){
+		displayWinner("1");
+	}else{
+		displayWinner('2');
+	}
+}
 
-var player1 = new Player(); //Create Players and load Image
-var player2 = new Player();
-var image= new Image();
-var activePlayer = player1; // Player one begin
+//Create a DIV and display the winner
+function displayWinner(winner){
+	winSound.currentTime =0;
+	winSound.play();
+	var winBox = document.createElement('div');
+	var content = document.createTextNode(`Le joueur ${winner} a gagné !`);
+	winBox.appendChild(content);
+	var mainContainer = document.getElementById('main');
+	document.body.insertBefore(winBox, mainContainer);
+	winBox.classList.add('win-box');
+	/*mainContainer.classList.add('blurred');*/
+}
 
-image.addEventListener('load', imageLoaded); // Optional
-image.src = "images/diceImage.png";
+//Rendering the context
+function render(){
+	context.clearRect(0,0,canvas.width,canvas.height);
+	context.drawImage(image, dice.sourceX,0,200, 200, 0,0,canvas.width, canvas.height);
+	canvas.classList.add('rotate'); //Set the rotate class
+}
 
-//Event listeners
-rollButton.addEventListener('click', clickRoll);
-holdButton.addEventListener('click', function(){
-	activePlayer.hold();
-	displayRound();
-	displayScore();
-	nextPlayer();
-	displayBg();
-});
-
-startButton.addEventListener('click', function(){
-	location.reload();
-});
-
-
-
-
-
-
-
-
-})();
