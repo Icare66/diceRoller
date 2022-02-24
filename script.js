@@ -47,7 +47,7 @@ loseSound.addEventListener("canplaythrough", loadAssets);
 loseSound.load();
 
 //Game variable
-var scoreToWin=5;
+var scoreToWin=100;
 var LOADING=0;
 var PLAYING=1;
 var OVER=2;
