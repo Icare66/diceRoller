@@ -92,7 +92,10 @@ var dice ={
 	COLUMNS: 6,
 	sourceX:0,
 	updateFace(face){
-		this.sourceX = ((face-1) % this.COLUMNS) * this.SIZE;
+		this.sourceX = (face % this.COLUMNS) * this.SIZE;
+	},
+	resetFace(){
+		this.sourceX =0;
 	}
 }
 
@@ -111,11 +114,12 @@ function debounceButton(button){
 
 //Roll Function
 function roll(){
-	let RAND = Math.floor(Math.random() * 6) +1;
+	let RAND = Math.floor(Math.random() * 5) +1;
 	debounceButton(rollButton);
 	canvas.classList.remove('rotate'); // unset the rotate class
 	activePlayer.roll(RAND);
 	if(activePlayer.ROUND ===0){
+		setTimeout(function(){dice.resetFace();}, 500);
 		displayScore();
 		nextPlayer();
 		displayActive();
@@ -129,7 +133,8 @@ function hold(){
 	activePlayer.hold();
 	displayScore();
 	nextPlayer();
-	displayActive();	
+	displayActive();
+	dice.resetFace();	
 }
 
 //restart function
