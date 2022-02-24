@@ -236,7 +236,7 @@ body {
 
 .rollHold-container {
   position: relative;
-  bottom: 16%; }
+  bottom: 15%; }
   @media only screen and (max-width: 900px) {
     .rollHold-container {
       bottom: 0;
