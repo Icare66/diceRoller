@@ -1,7 +1,7 @@
 @import '_base.sass'
 @import 'mixins.sass'
 $inactive: rgba(0, 0, 0,0.05)
-$active: rgba(210,210,210,1)
+$active: rgba(225,225,225,1)
 $red: rgb(214, 69, 65)
 $boxShadow: 4px 1px 28px 5px rgba(191,191,191,0.57)
 $large_screen: "900px"
@@ -51,7 +51,7 @@ $large_screen: "900px"
 	@include respond(medium)
 		font-size: 5rem
 	@include respond(small)
-	@include textOption(3rem,400,uppercase,black)
+		@include textOption(3rem,400,uppercase,black)
 
 .dot
 	content: ""
@@ -162,7 +162,7 @@ $large_screen: "900px"
 #canvas
 	@include width-height(20rem,20rem)
 	background: white
-	border-radius: 2.5rem
+	border-radius: 1rem
 	@include box-shadow($boxShadow)
 	@include respond(medium)
 		@include width-height(17rem,17rem)
@@ -189,11 +189,12 @@ $large_screen: "900px"
 	opacity: 0.95
 	@include transition(opacity 1s ease-out)
 	@include respond(medium)
-			top: 10%
-			@include width-height(32rem,8rem)
-			font-size: 2.5rem
-			@include respond(medium)
-				top: 50%
+		top: 10%
+		@include width-height(32rem,8rem)
+		font-size: 2.5rem
+	@include respond(small)
+		top: 50%
+
 #loading-screen
 	display: none
 .loading-screen

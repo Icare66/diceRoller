@@ -1,4 +1,4 @@
-//Display
+//General
 var container1 = document.getElementById('player1');
 var container2 = document.getElementById('player2');
 var dotPlayer1 = document.getElementById('dotPlayer1');
@@ -47,7 +47,7 @@ loseSound.addEventListener("canplaythrough", loadAssets);
 loseSound.load();
 
 //Game variable
-var scoreToWin=100;
+var scoreToWin=5;
 var LOADING=0;
 var PLAYING=1;
 var OVER=2;

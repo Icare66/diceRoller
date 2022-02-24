@@ -58,37 +58,37 @@ body {
     display: none; }
 
 .active-player {
-  background: #d2d2d2;
+  background: #e1e1e1;
   z-index: 5;
   animation: anim 1s cubic-bezier(0.24, 0.83, 0.69, 0.89); }
 @-webkit-keyframes anim {
   0% {
-    background: #d2d2d2; }
+    background: #e1e1e1; }
   50% {
     background: rgba(180, 180, 180, 0.8); }
   100% {
-    background: #d2d2d2; } }
+    background: #e1e1e1; } }
 @-moz-keyframes anim {
   0% {
-    background: #d2d2d2; }
+    background: #e1e1e1; }
   50% {
     background: rgba(180, 180, 180, 0.8); }
   100% {
-    background: #d2d2d2; } }
+    background: #e1e1e1; } }
 @-o-keyframes anim {
   0% {
-    background: #d2d2d2; }
+    background: #e1e1e1; }
   50% {
     background: rgba(180, 180, 180, 0.8); }
   100% {
-    background: #d2d2d2; } }
+    background: #e1e1e1; } }
 @keyframes anim {
   0% {
-    background: #d2d2d2; }
+    background: #e1e1e1; }
   50% {
     background: rgba(180, 180, 180, 0.8); }
   100% {
-    background: #d2d2d2; } }
+    background: #e1e1e1; } }
 .sub-container {
   text-align: center; }
   @media only screen and (max-width: 600px) {
@@ -103,14 +103,16 @@ body {
   color: black;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  font-size: 3rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: black; }
+  align-items: center; }
   @media only screen and (max-width: 900px) {
     .player-label {
       font-size: 5rem; } }
+  @media only screen and (max-width: 600px) {
+    .player-label {
+      font-size: 3rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: black; } }
 
 .dot {
   content: "";
@@ -277,7 +279,7 @@ body {
   width: 20rem;
   height: 20rem;
   background: white;
-  border-radius: 2.5rem;
+  border-radius: 1rem;
   -webkit-box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000;
   -moz-box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000;
   box-shadow: 4px 1px 28px 5px rgba(191, 191, 191, 0.57) 10px 0px 0px #000000; }
@@ -375,7 +377,7 @@ body {
       width: 32rem;
       height: 8rem;
       font-size: 2.5rem; } }
-  @media only screen and (max-width: 900px) and (max-width: 900px) {
+  @media only screen and (max-width: 600px) {
     .win-box {
       top: 50%; } }
 
