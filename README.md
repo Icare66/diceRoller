@@ -1,12 +1,6 @@
 # JavaScript Dice Roller
 
-Projet réalisé dans le cadre de ma formation
 ### [live demo](https://marinvcq.github.io/diceRoller/)
-
-## Livrable attendu
-
-* Un jeu fonctionnel
-* Une interface lisible qui correspond à la maquette fournie
 
 ### fonctionalités globales:
 
